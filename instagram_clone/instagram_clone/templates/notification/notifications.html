@@ -1,0 +1,157 @@
+{% extends 'base.html' %} {% load static %} {% load humanize %} {% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      {% for notification in notifications %} 
+      {% if notification.notification_type == 1 %}
+      <div
+        class="alert alert-primary alert-dismissible fade show mt-2"
+        role="alert"
+      >
+        {% if notification.sender.profile.picture %}
+        <img
+          class="card-img-right rounded-circle img-fluid mr-4"
+          style="height: 1%; width: 20%"
+          src="{{notification.sender.profile.picture.url}}"
+          alt="Card image cap"
+        />
+        {% else %}
+        <img
+          class="card-img-right rounded-circle img-fluid mr-2"
+          style="height: 1%; width: 20%"
+          src="{% static 'img/default_pfp.jpg' %}"
+          alt="Card image cap"
+        />
+        {% endif %}
+        <strong
+          ><a
+            href="{% url 'profile' notification.sender.profile.user.username %}"
+            >{{notification.sender.profile.user.username}}</a
+          >
+        </strong>
+        liked your
+        <strong
+          ><a href="{{notification.post.get_absolute_url}}">post</a>.
+        </strong><br /><span
+          class="badge bg-secondary float-lg-end"
+          style="margin-top: -19%"
+          >{{notification.date|naturaltime}}</span
+        >
+        <br /><span
+          class="badge bg-primary float-lg-end"
+          style="margin-top: -19%"
+          ><i class="fa-solid fa-thumbs-up"></i
+        ></span>
+        <br />
+        <a href="{% url 'delete_notification' notification.id %}">
+        <span
+          class="badge bg-danger float-lg-end"
+          style="margin-top: -5%"
+          ><i class="fa-solid fa-trash"></i> Remove Notification</span>
+
+        </a>
+      </div>
+      {% elif notification.notification_type == 3 %}
+      <div
+        class="alert alert-primary alert-dismissible fade show mt-2"
+        role="alert"
+      >
+        {% if notification.sender.profile.picture %}
+        <img
+          class="card-img-right rounded-circle img-fluid mr-4"
+          style="height: 1%; width: 20%"
+          src="{{notification.sender.profile.picture.url}}"
+          alt="Card image cap"
+        />
+        {% else %}
+        <img
+          class="card-img-right rounded-circle img-fluid mr-2"
+          style="height: 1%; width: 20%"
+          src="{% static 'img/default_pfp.jpg' %}"
+          alt="Card image cap"
+        />
+        {% endif %}
+
+        <strong
+          ><a
+            href="{% url 'profile' notification.sender.profile.user.username %}"
+            >{{notification.sender.profile.user.username}}</a
+          >
+        </strong>
+        started following
+        <strong
+          ><a href="{% url 'profile' notification.user.username %}">you</a>.
+        </strong><br /><span
+          class="badge bg-secondary float-lg-end"
+          style="margin-top: -19%"
+          >{{notification.date|naturaltime}}</span
+        >
+        <br />
+        <span class="badge bg-primary float-lg-end" style="margin-top: -19%"
+          ><i class="fa-solid fa-user-plus"></i
+        ></span><br />
+        <a href="{% url 'delete_notification' notification.id %}">
+        <span
+          class="badge bg-danger float-lg-end"
+          style="margin-top: -5%"
+          ><i class="fa-solid fa-trash"></i> Remove Notification</span>
+
+        </a>
+      </div>
+      
+      {% else %}
+      <div
+        class="alert alert-primary alert-dismissible fade show mt-2"
+        role="alert"
+      >
+      {% if notification.sender.profile.picture %}
+      <img
+        class="card-img-right rounded-circle img-fluid mr-4"
+        style="height: 1%; width: 20%"
+        src="{{notification.sender.profile.picture.url}}"
+        alt="Card image cap"
+      />
+      {% else %}
+      <img
+        class="card-img-right rounded-circle img-fluid mr-2"
+        style="height: 1%; width: 20%"
+        src="{% static 'img/default_pfp.jpg' %}"
+        alt="Card image cap"
+      />
+      {% endif %}
+
+      <strong
+      ><a
+        href="{% url 'profile' notification.sender.profile.user.username %}"
+        >{{notification.sender.profile.user.username}}</a
+      >
+    </strong>
+    commented on your
+    <strong
+      ><a href="{{notification.post.get_absolute_url}}">post</a>.
+    </strong><br /><span
+          class="badge bg-secondary float-lg-end"
+          style="margin-top: -19%"
+          >{{notification.date|naturaltime}}</span
+        >
+        <br /><span
+          class="badge bg-success float-lg-end"
+          style="margin-top: -19%"
+          ><i class="fa-solid fa-comment"></i>
+        </span><br />
+        <a href="{% url 'delete_notification' notification.id %}">
+        <span
+          class="badge bg-danger float-lg-end"
+          style="margin-top: -5%"
+          ><i class="fa-solid fa-trash"></i> Remove Notification</span>
+
+        </a>
+      </div>
+      
+      {% endif %}
+      {% endfor %}
+      
+    </div>
+  </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,54 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <h1 style="text-align: center">Search for a TAG</h1>
+      <form>
+        <div class="input-group mb-2">
+          <input
+            type="search"
+            name="q"
+            value="{{request.GET.q}}"
+            class="form-control rounded"
+            placeholder="Search..."
+            aria-label="Search"
+            aria-describedby="search-addon"
+          />
+          <button class="btn btn-outline-primary" type="submit">
+            <i class="fa-solid fa-search"></i>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="container mt-1">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <a href="{% url 'tags' %}" class="btn btn-outline-primary float-end"
+        >View All Tags</a
+      >
+    </div>
+  </div>
+</div>
+{% for tag in tags %} {% if tag.posts_count >= 1 %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 offset-md-3 mt-2">
+      <div class="card mb-2" style="width: 30rem">
+        <div class="card-body" style="background-color: #a5c0d9">
+          <a
+            href="{{tag.get_absolute_url}}"
+            style="text-decoration: none; color: black"
+            ><h5 class="card-title">
+              #{{tag}}<span class="badge bg-secondary float-right mt-2"
+                >{{tag.posts_count}}</span
+              >
+            </h5></a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %} {% endfor %} {% endblock content %}

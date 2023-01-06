@@ -1,0 +1,45 @@
+
+{% comment %} {% for a in s %}
+{% for b in a %}
+<hr>{{a.user}}{{b.following}}<br>
+{% for c in b.story.all %}
+{{c.caption}}<br>
+{{c.content}}<br>
+{% endfor %}
+{% endfor %}
+<hr><br>
+{% endfor %} {% endcomment %}
+{% comment %} {% for q in s %}
+
+    {% for p in q %}
+    <hr>
+    {{p.user}}
+    <br>
+        {{p.caption}}<br>
+        {{p.content.url}}
+        <hr>
+    {% endfor %}
+    <br>
+{% endfor %} {% endcomment %}
+{% load humanize %}
+{% for story in s %} 
+
+    {% for file in story %}
+    {{file.date}}
+{% comment %} 
+        {{file.story.first.content.name}}<br>
+          {% endcomment %}
+
+        {% if file.story.all.count > 1 %}
+        This has this much content: {{file.story.all.count}} <br>
+
+        {% for content in file.story.all %}<br>
+{{content.posted|naturaltime}}    <hr>    {% endfor %}
+
+{% endif %}
+        {% comment %} {{content.content}} {% endcomment %}
+        
+        <br>
+        
+    {% endfor %}
+{% endfor %}

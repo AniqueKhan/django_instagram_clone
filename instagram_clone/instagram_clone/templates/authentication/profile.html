@@ -1,0 +1,240 @@
+{% extends 'base.html' %} {% load static %}{% block stylesheet %}
+
+<link rel="stylesheet" href="{% static 'css/index.css' %}" />
+{% endblock stylesheet %}  {% block content %}
+<section class="h-100 gradient-custom-2">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-lg-9 col-xl-7">
+        <div class="card">
+          <div
+            class="rounded-top text-white d-flex flex-row"
+            style="background-color: #a5c0d9; height: 200px"
+          >
+            <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px">
+              {% if profile.picture %}
+              <img
+                src="{{profile.picture.url}}"
+                alt="Generic placeholder image"
+                class="img-fluid img-thumbnail mt-4 mb-2"
+                style="width: 150px; z-index: 1"
+              />
+              {% else %}
+              <img
+                src="{% static 'img/default_pfp.jpg' %}"
+                alt="Generic placeholder image"
+                class="img-fluid img-thumbnail mt-4 mb-2"
+                style="width: 150px; z-index: 1"
+              />
+              {% endif %} {% if request.user.is_authenticated and request.user == profile.user %}
+              <a
+                href="{% url 'edit_profile' %}"
+                style="z-index: 1"
+                class="btn btn-outline-primary"
+                data-mdb-ripple-color="dark"
+                >Edit profile</a
+              >{% else %} {% if follow_status %}<a
+                href="{% url 'follow' profile.user 0 %}"
+                style="z-index: 1"
+                class="btn btn-outline-primary"
+                data-mdb-ripple-color="dark"
+                >Unfollow</a
+              >{% else %}<a
+                href="{% url 'follow' profile.user 1 %}"
+                style="z-index: 1"
+                class="btn btn-outline-success"
+                data-mdb-ripple-color="dark"
+                >Follow</a
+              >{% endif %} {% endif %}
+            </div>
+            <div class="ms-3" style="margin-top: 130px">
+              <h5 style="color: black">@{{profile.user.username}}</h5>
+              {% if profile.first_name and profile.last_name %}
+              <p style="color: black">
+                {{profile.first_name}} {{profile.last_name}}
+              </p>
+              {% endif %}
+            </div>
+          </div>
+          <div class="p-4 text-black" style="background-color: #f8f9fa">
+            <div class="d-flex justify-content-end text-center py-1">
+              <div>
+                <p class="mb-1 h5">{{posts_count}}</p>
+                <p class="small text-muted mb-0">Posts</p>
+              </div>
+              <div class="px-3">
+                <p class="mb-1 h5">{{followers_count}}</p>
+                <p class="small text-muted mb-0">Followers</p>
+              </div>
+              <div>
+                <p class="mb-1 h5">{{following_count}}</p>
+                <p class="small text-muted mb-0">Following</p>
+              </div>
+            </div>
+          </div>
+          <div class="card-body text-black">
+            <div class="mb-2">
+              <div class="p-3" style="background-color: #f8f9fa">
+                <p class="font-italic mb-1">
+                  {% if profile.location %}
+                  <b>Location: </b>{{profile.location}}{% endif %}
+                </p>
+                <p class="font-italic mb-1">
+                  {% if profile.url %} <b>URL: </b
+                  ><a href="{{profile.url}}" target="_blank">{{profile.url}}</a
+                  >{% endif %}
+                </p>
+                <p class="font-italic mb-1">
+                  {% if profile.profile_info %}
+                  <b>Bio: </b>{{profile.profile_info}}{% endif %}
+                </p>
+              </div>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              {% if url_name == 'profile' %}
+              <p class="lead fw-normal mb-0">
+                <a
+                  href="{% url 'profile' request.user.username %}"
+                  style="text-decoration: none"
+                  >My Posts</a
+                >
+              </p>
+              <p class="lead fw-normal mb-0">
+                <a
+                  href="{% url 'saved' request.user.username %}"
+                  style="text-decoration: none; color: black"
+                  >Saved</a
+                >
+              </p>
+              {% else %}
+              <p class="lead fw-normal mb-0">
+                <a
+                  href="{% url 'profile' request.user.username %}"
+                  style="text-decoration: none; color: black"
+                  >My Posts</a
+                >
+              </p>
+              <p class="lead fw-normal mb-0">
+                <a
+                  href="{% url 'saved' request.user.username %}"
+                  style="text-decoration: none"
+                  >Saved</a
+                >
+              </p>
+              {% endif %}
+            </div>
+            {% if posts.count == 0 %} {% if url_name == "profile" %}
+            <div class="alert alert-primary" role="alert">
+              You currently have no posts.
+            </div>
+            <a href="{% url 'new_post' %}"
+              ><button type="button" class="btn btn-outline-primary">
+                Create New Post!
+              </button></a
+            >
+            {% else %}
+            <div class="alert alert-primary" role="alert">
+              You currently have not saved any posts.
+            </div>
+            {% endif %} {% else %}{% for post in posts %}
+            {% if post.content.all.count == 1 %}
+            {% if post.content.first.file.name|slice:'-3:'|lower == 'jpg' or post.content.first.file.name|slice:'-3:'|lower == 'png' %}
+                <img
+                  src="{{post.content.first.file.url}}"
+                  class="card-img-top"
+                  alt="..."
+              />
+              {% else %}
+                <video
+                  id="my-video"
+                  width="620"
+                  height="400"
+                  controls="controls"
+                  preload="metadata"
+                  src="{{post.content.first.file.url}}#t=0.5"
+                  type="video/mp4"
+                ></video>
+              
+            {% endif %}
+
+
+
+            
+            {% else %}
+
+            <div id="carouselExampleControls{{post.id}}"  data-interval="false" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-inner">
+                {% for file in post.content.all  %}
+                <div class="carousel-item {% if post.content.first.file.name == file.file.name %}active{% endif %} ">
+                  {% if file.file.name|slice:'-3:'|lower == 'jpg' or file.file.name|slice:'-3:'|lower == 'png'%}
+                  <img src="{{file.file.url}}" class="d-block w-100" alt="...">
+                  {% else %}
+                  <video
+                  id="my-video"
+                  width="620"
+                  height="400"
+                  controls="controls"
+                  preload="metadata"
+                  src="{{file.file.url}}#t=0.5"
+                  type="video/mp4"
+                ></video>
+                  {% endif %}
+                  
+                </div>
+                {% endfor %}
+                
+              </div>
+              <button style="margin-top:50%;height:10px" class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls{{post.id}}" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button style="margin-top:50%;height:10px" class="carousel-control-next"  type="button" data-bs-target="#carouselExampleControls{{post.id}}" data-bs-slide="next">
+                <span class="carousel-control-next-icon" style="color:blueviolet" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+            {% endif %}<a
+            href="{{post.get_absolute_url}}"
+            class="btn btn-outline-primary mt-3 mb-3 float-end"
+            >View Post Details</a
+          >
+            {% endfor %}{% endif %}
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script>function playPauseVideo() {
+  let videos = document.querySelectorAll("video");
+  videos.forEach((video) => {
+      // We can only control playback without insteraction if video is mute
+      video.muted = true;
+      // Play is a promise so we need to check we have it
+      let playPromise = video.play();
+      if (playPromise !== undefined) {
+          playPromise.then((_) => {
+              let observer = new IntersectionObserver(
+                  (entries) => {
+                      entries.forEach((entry) => {
+                          if (
+                              entry.intersectionRatio !== 1 &&
+                              !video.paused
+                          ) {
+                              video.pause();
+                          } else if (video.paused) {
+                              video.play();
+                          }
+                      });
+                  },
+                  { threshold: 0.2 }
+              );
+              observer.observe(video);
+          });
+      }
+  });
+}
+
+playPauseVideo();</script>
+{% endblock content %}
