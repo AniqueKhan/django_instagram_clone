@@ -2,7 +2,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render,redirect
 from django.urls import resolve , reverse
 from post.models import Follow, Post , Stream
-from .forms import EditProfileForm, SignupForm,ChangePasswordForm,ResetPasswordForm,ResetPasswordConfirmForm
+from .forms import EditProfileForm, SignupForm,ChangePasswordForm
 from .models import Profile
 from django.db import transaction
 from django.contrib.auth.models import User
@@ -15,13 +15,7 @@ from django.conf import settings
 # Create your views here.
 
 
-def sending_email(request,email,token):
-	subject = 'Reset Link'
-	msg = f'Hi ,click on this link to reset your password: \n {request.scheme}://{request.get_host()}/resetpasswordconfirm/{token}'
-	email_from = settings.EMAIL_HOST_USER
-	recipient_list = [email]
-	send_mail(subject,msg,email_from,recipient_list)
-	return True
+
 
 def signup(request):
 	if request.method == 'POST':
@@ -65,50 +59,8 @@ def password_change(request):
 def password_change_done(request):
 	return render(request, 'authentication/change_password_done.html')
 
-def reset_password(request):
-	# if request.method == 'POST':
-	# 	form = ResetPasswordForm(request.POST)
-	# 	if form.is_valid():
-	# 		email = request.POST.get('email')
-	# 		user = User.objects.filter(email=email)
-	# 		token = str(uuid.uuid4())
-	# 		profile = Profile.objects.get(user__in=user)
-	# 		profile.token_for_forgot_password = token
-	# 		profile.save()
-	# 		sending_email(request,email,token)
-	# 		return redirect('reset_password_done')
-	# else:
-	# 	form = ResetPasswordForm()
 
-	# context = {
-	# 	'form':form,
-	# }
 
-	return render(request, 'reset_password.html', context)
-
-def reset_password_done(request):
-	return render(request, 'reset_password_done.html')
-
-def reset_password_confirm(request,token):
-	profile = Profile.objects.filter(token_for_forgot_password=token).first()
-	if request.method=="POST":
-		form = ResetPasswordConfirmForm(request.POST)
-		if form.is_valid():
-			new_password = form.cleaned_data.get('new_password')
-			profile.user.set_password(new_password)
-			profile.user.save()
-			return redirect('reset_password_confirm_done')
-	else:
-		form = ResetPasswordConfirmForm()
-
-	context = {
-		'form':form,
-	}
-
-	return render(request, 'reset_password_confirm.html',context)
-
-def reset_password_confirm_done(request):
-    return render(request,'reset_password_confirm_done.html')
 
 @login_required
 def profile(request,username):

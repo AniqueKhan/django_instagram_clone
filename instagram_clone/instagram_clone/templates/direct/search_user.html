@@ -60,8 +60,7 @@
               >
             </h5>
             <h5 class="card-title">
-              {% if user.first_name %}{{user.first_name}}{% endif %} {% if
-              user.last_name %}{{user.last_name}}{% endif %}
+              {% if user.first_name %}{{user.first_name}}{% endif %} {% if user.last_name %}{{user.last_name}}{% endif %}
             </h5>
             <a
               href="{% url 'new_conversation' user.user.username %}"

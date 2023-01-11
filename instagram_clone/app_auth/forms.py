@@ -72,33 +72,8 @@ class ChangePasswordForm(forms.ModelForm):
 			self._errors['new_password'] =self.error_class(['Passwords do not match.'])
 		return self.cleaned_data
 
-class ResetPasswordForm(forms.ModelForm):
-	email = forms.CharField(widget=forms.EmailInput(), max_length=100, required=True,)
-	class Meta:
-		model = User
-		fields = ('email',)
-	def clean(self):
-		super(ResetPasswordForm, self).clean()
-		email = self.cleaned_data.get("email")
-		user = User.objects.filter(email=email)
-		if not user:
-			self._errors['email'] =self.error_class(['There is no account associated with this email.'])
-		return self.cleaned_data
 
-class ResetPasswordConfirmForm(forms.ModelForm):
-	new_password = forms.CharField(widget=forms.PasswordInput(), label="New password", required=True)
-	confirm_password = forms.CharField(widget=forms.PasswordInput(), label="Confirm new password", required=True)
 
-	class Meta:
-		model = User
-		fields = ('id','new_password', 'confirm_password')
-
-	def clean(self):
-		super(ResetPasswordConfirmForm, self).clean()
-		new_password = self.cleaned_data.get('new_password')
-		confirm_password = self.cleaned_data.get('confirm_password')
-		if new_password != confirm_password:
-			self._errors['new_password'] =self.error_class(['Passwords do not match.'])
 
 
 class EditProfileForm(forms.ModelForm):

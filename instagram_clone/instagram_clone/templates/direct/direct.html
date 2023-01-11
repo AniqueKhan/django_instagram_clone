@@ -1,5 +1,6 @@
 {% extends 'base.html' %} {% load static %} 
 
+
 {% block stylesheet %}
 <link rel="stylesheet" href="{% static 'css/direct.css' %}" />
 {% endblock stylesheet %}
@@ -27,7 +28,7 @@
           {{message.unread}}</div>
           {% endif %}
             <div class="d-flex align-items-start">
-              {% if message.user.profile.picture %}<img
+               {% if message.user.profile.picture %}<img
                 src="{{message.user.profile.picture.url}}"
                 class="rounded-circle mr-1"
                 alt="Vanessa Tucker"
@@ -40,7 +41,7 @@
                 width="40"
                 height="40"
               />
-              {% endif %}
+              {% endif %} 
 
               <div class="flex-grow-1 ml-3">
                 {{message.user.username}} {% if active_direct == message.user.username %}
@@ -65,13 +66,25 @@
           <div class="py-2 px-4 border-bottom d-none d-lg-block">
             <div class="d-flex align-items-center py-1">
               <div class="position-relative">
+                
+                {% if active_direct_profile.picture %}
                 <img
-                  src="{{active_direct_profile.picture.url}}"
-                  class="rounded-circle mr-1"
-                  alt="Sharon Lessman"
-                  width="40"
-                  height="40"
-                />
+                src="{{active_direct_profile.picture.url}}"
+                class="rounded-circle mr-1"
+                alt="Sharon Lessman"
+                width="40"
+                height="40"
+              /> {% else %}
+              <img
+              src="{% static 'img/default_pfp.jpg' %}"
+              class="rounded-circle mr-1"
+              alt="Vanessa Tucker"
+              width="40"
+              height="40"
+            />
+                {% endif %} 
+                  
+                
               </div>
               <div class="flex-grow-1 pl-3">
                 <strong>{{active_direct}}</strong>
@@ -85,13 +98,24 @@
               {% if direct.sender.profile.user.username != request.user.username%}
               <div class="chat-message-left pb-4">
                 <div>
-                  <img
+                  
+                   {% if direct.sender.profile.picture %}
+                    <img
                     src="{{direct.sender.profile.picture.url}}"
                     class="rounded-circle mr-1"
                     alt="Sharon Lessman"
                     width="40"
                     height="40"
+                  /> {% else %} 
+                  <img
+                    src="{% static 'img/default_pfp.jpg' %}"
+                    class="rounded-circle mr-1"
+                    alt="Sharon Lessman"
+                    width="40"
+                    height="40"
                   />
+                  {% endif %} 
+                  
                   <div class="text-muted small text-nowrap mt-2">
                     {{direct.date.time}}
                   </div>
@@ -105,8 +129,14 @@
               </div>
               {% else %}
               <div class="chat-message-right mb-4">
-								<div>
-									<img src="{{direct.sender.profile.picture.url}}" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
+								<div> 
+                {% if direct.sender.profile.picture %}
+                <img src="{{direct.sender.profile.picture.url}}" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
+                {% else %}
+                <img src="{% static 'img/default_pfp.jpg' %}" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
+
+                {% endif %}
+                  
 									<div class="text-muted small text-nowrap mt-2">{{direct.date.time}}</div>
 								</div>
 								<div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
@@ -138,4 +168,4 @@
   </div>
 </main>
 {% endif %}
-{% endblock content %}
+{% endblock content %} 
