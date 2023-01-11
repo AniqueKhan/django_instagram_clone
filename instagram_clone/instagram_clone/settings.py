@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'direct',
     'notification',
     'stories',
+    'whitenoise.runserver_nostatic', 
 ]
 
 MIDDLEWARE = [
