@@ -24,4 +24,5 @@ sqlparse==0.4.2
 typing-extensions==4.3.0
 vine==5.0.0
 wcwidth==0.2.5
+whitenoise==6.3.0
 zipp==3.8.1
