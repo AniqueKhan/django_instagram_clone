@@ -131,7 +131,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'instagram_clone/static')
 ]
-STATIC_ROOT = os.path.join(BASE_DIR,'instagram_clone/static_root')
+STATIC_ROOT = os.path.join(BASE_DIR,'instagram_clone/staticroot')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
