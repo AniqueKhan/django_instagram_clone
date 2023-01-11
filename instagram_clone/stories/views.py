@@ -26,27 +26,6 @@ def new_story(request):
     }
     return render(request,'stories/new_story.html',context)
 
-def test(request):
-    user=request.user
-    following = Follow.objects.filter(follower=user)
-    
-    f = []
-    
-    for p in following:
-        f.append(p.following)
-
-    s = []
-    for a in f:
-        k=(StoryStream.objects.filter(user = user,following=a))
-        if k:
-            s.append(k)
-
-    context={
-        "following":following,
-        "f":f,
-        "s":s,
-    }
-    return render(request,'stories/test.html',context)
 
 
 def delete_story(request,story_id):
