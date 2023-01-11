@@ -48,15 +48,34 @@
                     data-bs-target="#exampleModal-own-story"
                   >
                     <div class="single-story">
+                      
+                      {% if request.user.profile.picture %}
                       <img
-                        src="{{request.user.profile.picture.url}}"
+                      src="{{request.user.profile.picture.url}}"
+                      class="single-story-bg"
+                    /> {% else %}
+                    <img
+                        src="{% static 'img/default_pfp.jpg' %}"
                         class="single-story-bg"
                       />
-                      <div class="story-author">
+                      {% endif %}
+                        
+                      
+                      <div class="story-author"> 
+                        
+                        {% if request.user.profile.picture %}
                         <img
-                          src="{{request.user.profile.picture.url}}"
-                          style="border: 1px solid red"
-                        />
+                        src="{{request.user.profile.picture.url}}"
+                        style="border: 1px solid red"
+                      />
+                        {% else %}
+                        <img
+                        src="{% static 'img/default_pfp.jpg' %}"
+                        style="border: 1px solid red"
+                      />
+                        {% endif %}
+                          
+                        
                         <p>{{request.user}}</p>
                       </div>
                     </div>
