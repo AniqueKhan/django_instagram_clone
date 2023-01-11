@@ -226,15 +226,32 @@
                     data-bs-target="#exampleModal{{file.id}}"
                   >
                     <div class="single-story">
+                      
+                      {% if file.following.profile.picture %}
                       <img
-                        src="{{file.following.profile.picture.url}}"
+                      src="{{file.following.profile.picture.url}}"
+                      class="single-story-bg"
+                    />
+                    {% else %}
+                    <img
+                        src="{% static 'img/default_pfp.jpg' %}"
                         class="single-story-bg"
                       />
+                      {% endif %}
+                        
+                      
                       <div class="story-author">
+                        {% if file.following.profile.picture %}
                         <img
                           src="{{file.following.profile.picture.url}}"
                           style="border: 1px solid red"
                         />
+                        {% else %}
+                        <img
+                          src="{% static 'img/default_pfp.jpg' %}"
+                          style="border: 1px solid red"
+                        />
+                        {% endif %}
                         <p>{{file.following}}</p>
                       </div>
                     </div>

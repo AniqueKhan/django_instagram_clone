@@ -81,8 +81,7 @@
                 <span class="badge rounded-pill bg-danger">{{directs_count}}</span>{% endif %}
               </a>
             </li>
-            
-            {% if request.user.is_admin %}
+            {% if request.user.is_superuser %}
             <li class="nav-item ml-2">
               <a class="nav-link" href="/admin"
                 ><i class="fa-solid fa-user-gear"></i> Admin</a
