@@ -23,3 +23,4 @@ def count_notifications(request):
     if request.user.is_authenticated:
         count_notifications = Notification.objects.filter(user=request.user,is_seen=False).count()
     return {"count_notifications":count_notifications}
+    
