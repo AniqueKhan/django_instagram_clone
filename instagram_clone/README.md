@@ -32,7 +32,7 @@ There are so many more things that are part of this project that I could not men
 
 Also, even with bootstrap, it took a lot of time designing the front-end of the website.
 
-The project is hosted at https://lnkd.in/dR3XiMsC. I invite you to play around with my project. Suggestions , advices and criticism , everything is welcomed in the comment section :)
+The project is hosted at https://lnkd.in/dFP_qZCN . I invite you to play around with my project. Suggestions , advices and criticism , everything is welcomed in the comment section :)
 
 GITHUB LINK: https://lnkd.in/dNg-q7hh
 
