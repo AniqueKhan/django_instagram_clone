@@ -26,14 +26,17 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
-    <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.ico' %}"/>
+    <link
+      rel="shortcut icon"
+      type="image/png"
+      href="{% static 'img/favicon.ico' %}"
+    />
     {% block stylesheet %}{% endblock stylesheet %}
-    
-    
+
     <title>Insta Clone - Anique</title>
   </head>
 
-  <body style="background-color: #EEF6F9">
+  <body style="background-color: #eef6f9">
     <nav
       class="navbar navbar-expand-lg navbar-light"
       style="background-color: #a5c0d9"
@@ -62,7 +65,6 @@
               <a class="nav-link" href="{% url 'new_story' %}"
                 ><i class="fa fa-plus-circle"></i> New Story</a
               >
-              
             </li>
             <li class="nav-item ml-2">
               <a class="nav-link" href="{% url 'new_post' %}"
@@ -76,9 +78,11 @@
             </li>
             <li class="nav-item ml-2">
               <a class="nav-link" href="{% url 'inbox' %}"
-                ><i class="fa-brands fa-facebook-messenger"></i> Inbox
-                {% if directs_count %}
-                <span class="badge rounded-pill bg-danger">{{directs_count}}</span>{% endif %}
+                ><i class="fa-brands fa-facebook-messenger"></i> Inbox {% if
+                directs_count %}
+                <span class="badge rounded-pill bg-danger"
+                  >{{directs_count}}</span
+                >{% endif %}
               </a>
             </li>
             {% if request.user.is_superuser %}
@@ -88,15 +92,15 @@
               >
             </li>
             {% endif %}
-              
-            
+
             <li class="nav-item ml-2">
               <a class="nav-link" href="{% url 'notifications' %}"
-                ><i class="fa-solid fa-bell"></i> Notifications 
-                {% if count_notifications %}
-                <span class="badge rounded-pill bg-danger">{{count_notifications}}</span>{% endif %}
-                </a
-              >
+                ><i class="fa-solid fa-bell"></i> Notifications {% if
+                count_notifications %}
+                <span class="badge rounded-pill bg-danger"
+                  >{{count_notifications}}</span
+                >{% endif %}
+              </a>
             </li>
             <li class="nav-item ml-2">
               <a class="nav-link" href="{% url 'search_user' %}"
@@ -143,7 +147,6 @@
               </ul>
             </li>
           </ul>
-          
         </div>
       </div>
     </nav>
