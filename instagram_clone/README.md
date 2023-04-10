@@ -4,23 +4,23 @@ Here, I have made an Instagram (Web-Version) look-like website with Django for t
 
 The key features I would like to highlight in my project are:
 
-1.       An authentication system with login, logout , signup and changing your password functionalities.
+1. An authentication system with login, logout , signup and changing your password functionalities.
 
-2.       An Instagram feed-like page where you get all the content coming from people you are following.
+2. An Instagram feed-like page where you get all the content coming from people you are following.
 
-3.       A post creation functionality with image/video uploading is supported and you can add tags with your posts as well.
+3. A post creation functionality with image/video uploading is supported and you can add tags with your posts as well.
 
-4.       A post can be liked and saved by other users.
+4. A post can be liked and saved by other users.
 
-5.       A commenting feature is also added on the posts where other users could comment on your posts.
+5. A commenting feature is also added on the posts where other users could comment on your posts.
 
-6.       A user can create a post with one image/video or multiple images/video that would show in a carousel just like it would normally do on Instagram.
+6. A user can create a post with one image/video or multiple images/video that would show in a carousel just like it would normally do on Instagram.
 
-7.       A user’s profile page where you could go and start following/unfollowing them and they would find their own posts and saved posts on their profile page as well.
+7. A user’s profile page where you could go and start following/unfollowing them and they would find their own posts and saved posts on their profile page as well.
 
-8.       A user can upload/update their own profile picture/username/bio etc.
+8. A user can upload/update their own profile picture/username/bio etc.
 
-9.       A search engine for posts, tags and users to help users find something they are looking for.
+9. A search engine for posts, tags and users to help users find something they are looking for.
 
 10. An inbox system where one user can message any other user and the chats gets updated as it goes along.
 
