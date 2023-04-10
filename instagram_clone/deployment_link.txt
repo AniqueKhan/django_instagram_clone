@@ -1,1 +1,1 @@
-https://djangoinstagramclone-production.up.railway.app/
+https://djangoinstagramclone-production-4f4f.up.railway.app/
