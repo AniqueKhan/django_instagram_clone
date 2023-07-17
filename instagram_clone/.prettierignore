@@ -1,2 +1,3 @@
 instagram_clone/templates/post/index.html
 instagram_clone/templates/post/tag_posts.html
+instagram_clone/templates/base.html

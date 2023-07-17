@@ -78,8 +78,8 @@
             </li>
             <li class="nav-item ml-2">
               <a class="nav-link" href="{% url 'inbox' %}"
-                ><i class="fa-brands fa-facebook-messenger"></i> Inbox {% if
-                directs_count %}
+                ><i class="fa-brands fa-facebook-messenger"></i> Inbox 
+                {% if directs_count %}
                 <span class="badge rounded-pill bg-danger"
                   >{{directs_count}}</span
                 >{% endif %}
@@ -95,8 +95,8 @@
 
             <li class="nav-item ml-2">
               <a class="nav-link" href="{% url 'notifications' %}"
-                ><i class="fa-solid fa-bell"></i> Notifications {% if
-                count_notifications %}
+                ><i class="fa-solid fa-bell"></i> Notifications 
+                {% if count_notifications %}
                 <span class="badge rounded-pill bg-danger"
                   >{{count_notifications}}</span
                 >{% endif %}
